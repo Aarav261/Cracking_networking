@@ -15,6 +15,7 @@ QUERY = """
 
 QUERY_DETAILS = """{
         event_details[]{
+        id
         title
         link
         date
@@ -29,7 +30,7 @@ def extract_meetup_links():
         page = browser.new_page()
         agentql_page = agentql.wrap(page)
         agentql_page.goto("https://www.meetup.com/en-AU/find/?keywords=tech&location=au--Canterbury&source=EVENTS&distance=tenMiles")
-        response = agentql_page.query_data(QUERY)
+        response = agentql_page.query_data(QUERY, mode = 'fast')
         
         for link in response['events']:
             links.append(link['link'])
@@ -38,13 +39,13 @@ def extract_meetup_links():
 
     return links
 
-
+Limit_links = 2
 def extract_meetup_events(links):
     event_list = []
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=False)
         
-        for link in links:
+        for link in links[:Limit_links]:
             page = browser.new_page()
             agentql_page = agentql.wrap(page)
             agentql_page.goto(link)
