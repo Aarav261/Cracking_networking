@@ -3,6 +3,7 @@ def main():
     from database import insert_event , insert_internship
     from internship_scraper import extract_internship_links
 
+
     URL_OF_INTERNSHIP_LISTING_PAGE = "https://au.gradconnection.com/internships/engineering-software/melbourne/"
 
     URL_OF_MEETUP_LISTING_PAGE = "https://www.meetup.com/en-AU/find/?keywords=tech&location=au--Canterbury&source=EVENTS&distance=tenMiles"
@@ -18,6 +19,7 @@ def main():
 
     for internship in internship_links[:LIMIT_LINKS]:
         insert_internship(internship)
+
         
 
 if __name__ == "__main__":
