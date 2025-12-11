@@ -4,6 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 GMAIL_USER = os.getenv('GMAIL_USER')
@@ -28,6 +29,3 @@ def send_email(subject, body, to_email, email, password):
     message.attach(part1)
     my_server.sendmail(email, to_email, message.as_string())
     my_server.quit()
-
-send_email("Test Subject", "This is a test email body.", 
-"anu0310v@gmail.com", GMAIL_USER, GMAIL_PASSWORD)
